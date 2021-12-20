@@ -24,6 +24,10 @@ namespace TME_Zadanie_Praktyczne
         public MainWindow()
         {
             InitializeComponent();
+            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+            Numbers numbers = new Numbers(4,15121067);
+            applicationDbContext.Numbers.Add(numbers);
+            applicationDbContext.SaveChanges();
         }
 
         private void LaunchGitHubSite(object sender, RoutedEventArgs e)
