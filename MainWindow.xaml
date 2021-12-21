@@ -24,7 +24,13 @@
     </mah:MetroWindow.RightWindowCommands>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/tme.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
         <!--  Your content  -->
+        <StackPanel>
+            <TextBlock>Sorry, nothing is here.</TextBlock>
+        </StackPanel>
     </Grid>
 </mah:MetroWindow>
 

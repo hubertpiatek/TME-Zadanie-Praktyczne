@@ -31,8 +31,12 @@ namespace TME_Zadanie_Praktyczne
         {
             InitializeComponent();
             InitDb();
-            
-            
+            var entity = applicationDbContext.Numbers.FirstOrDefault(item => item.Value == 1000001);
+            entity.Status = "false";
+            applicationDbContext.Numbers.Attach(entity);
+            applicationDbContext.Entry(entity).Property(p => p.Status).IsModified = true;
+            applicationDbContext.SaveChanges();
+
         }
 
         public void InitDb()
