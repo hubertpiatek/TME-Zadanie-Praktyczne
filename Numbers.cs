@@ -10,14 +10,14 @@ namespace TME_Zadanie_Praktyczne
 {
     class Numbers
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+
         public int Id { get; set; }
-        
+
         public int Value { get; set; }
         public String Status { get; set; }
-
-        public Numbers(int id,int Value) {
-            this.Id = id;
+        public Numbers() { 
+        }
+        public Numbers(int Value) {
             this.Value = Value;
             this.Status = "false";
             

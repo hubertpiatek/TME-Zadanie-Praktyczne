@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EntityFramework.BulkInsert.Extensions;
 using MahApps.Metro.Controls;
 
 namespace TME_Zadanie_Praktyczne
@@ -19,25 +20,46 @@ namespace TME_Zadanie_Praktyczne
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : MetroWindow
     {
+        int dbSize = 9000000;
+        int numberValue = 1000000;
+        ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+
         public MainWindow()
         {
             InitializeComponent();
-            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
-            Numbers numbers = new Numbers(4,15121067);
-            applicationDbContext.Numbers.Add(numbers);
-            applicationDbContext.SaveChanges();
+            InitDb();
+            
+            
         }
 
-        private void LaunchGitHubSite(object sender, RoutedEventArgs e)
+        public void InitDb()
         {
-            // Launch the GitHub site...
-        }
+            applicationDbContext.Configuration.AutoDetectChangesEnabled = false;
+            applicationDbContext.Configuration.ValidateOnSaveEnabled = false;
+            if (!applicationDbContext.Numbers.Any())
+            {
+                List<Numbers> numbers = new List<Numbers>();
+                for (int i = 0; i < dbSize; i++)
+                {
+                    numbers.Add(new Numbers(numberValue));
+                    if (numberValue % 500000 == 0)
+                    {
+                        applicationDbContext.BulkInsert(numbers);
+                        applicationDbContext.SaveChanges();
+                        numbers.Clear();
+                    }
+                    //Console.WriteLine(numberValue);
+                    numberValue++;
 
-        private void DeployCupCakes(object sender, RoutedEventArgs e)
-        {
-            // deploy some CupCakes...
+                }
+                applicationDbContext.BulkInsert(numbers);
+                applicationDbContext.SaveChanges();
+                numbers.Clear();
+            }
         }
     }
+    
 }
