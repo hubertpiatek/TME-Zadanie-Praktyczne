@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +64,61 @@ namespace TME_Zadanie_Praktyczne
                 applicationDbContext.SaveChanges();
                 numbers.Clear();
             }
+        }
+        private void numberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+           Regex regex = new Regex("[^0-9]+");
+           e.Handled = regex.IsMatch(e.Text);
+        }
+        private int inputValidation(int amountOfNumber)
+        {
+            errorTextBlock.Visibility = Visibility.Collapsed;
+            if (amountOfNumberValue.Text.Length == 0)
+            {
+                errorTextBlock.Visibility = Visibility.Visible;
+                errorTextBlock.Text = "Puste pole, wpisz ilość liczb do wylosowania!";
+                return 0;
+            }
+
+            else
+            {
+                try
+                {
+                    amountOfNumber = Convert.ToInt32(amountOfNumberValue.Text);
+                    Console.WriteLine(amountOfNumberValue.Text);
+                    if (amountOfNumber == 0 || amountOfNumberValue.Text.StartsWith("0"))
+                    {
+                        errorTextBlock.Visibility = Visibility.Visible;
+                        errorTextBlock.Text = "Wartość liczbowa musi być większa od 0";
+                        return 0;
+                    }
+                }
+                catch (FormatException err)
+                {
+                    errorTextBlock.Visibility = Visibility.Visible;
+                    errorTextBlock.Text = "Podana wartość nie jest liczbą";
+                    Console.WriteLine(err);
+                    return 0;
+                    
+                }
+
+            }
+            return amountOfNumber;
+        }
+        private void DrawNumbers(object sender, RoutedEventArgs e)
+        {
+            int amountOfNumber = 0;
+            amountOfNumber = inputValidation(amountOfNumber);
+            //if (amountOfNumber > 0) {
+              //  Random r = new Random();
+             //   int randomValue = 0;
+             //   List<int> randomNumvers = new List<int>();
+               // for (int i = 0; i < amountOfNumber; i++) {
+               //     randomValue = r.Next(numberValue, numberValue + dbSize - 1);
+               // }
+            //}
+            Console.WriteLine(amountOfNumber);
+            
         }
     }
     

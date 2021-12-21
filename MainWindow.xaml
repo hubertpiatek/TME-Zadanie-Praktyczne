@@ -7,7 +7,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  Title="Losowanie Unikatowych i Nieużytych Numerów"
                  Width="800"
-                 Height="450"
+                 Height="550"
                  GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
                  ResizeMode="CanResizeWithGrip"
                  WindowStartupLocation="CenterScreen"
@@ -25,12 +25,33 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/tme.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Images/tme.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <!--  Your content  -->
-        <StackPanel>
-            <TextBlock>Sorry, nothing is here.</TextBlock>
-        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Padding="2" Margin="0,15,0,0" Background="#FF2383D3" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock Padding="7" HorizontalAlignment="Center"  FontSize="25" FontFamily="SimSun" Foreground="White" FontWeight="Bold" >Witaj w aplikacji!</TextBlock>
+            </Border>
+
+            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Padding="10" Margin="0,15,0,0" Background="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Top" Width="340">
+                <StackPanel>
+                    <TextBlock Padding="7" Margin="0,7,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" FontWeight="Bold" >Podaj ilość liczb do wylosowania</TextBlock>
+                    <TextBox PreviewTextInput="numberValidationTextBox" x:Name="amountOfNumberValue" mah:TextBoxHelper.ClearTextButton="True" Width="280" mah:TextBoxHelper.Watermark="Ilość liczb" ></TextBox>
+                    <Button Click="DrawNumbers" Width="80" Margin="0,15,0,0" BorderBrush="#CC0078D7" Style="{StaticResource MahApps.Styles.Button.Square.Accent}">Losuj !</Button>
+                    <TextBlock x:Name="errorTextBlock" Foreground="Red" Padding="7" Margin="0,3,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Visibility="Collapsed"></TextBlock>
+                    <ProgressBar Width="200" Margin="0,10,0,0" Minimum="0" Maximum="100" Value="30" Visibility="Visible" IsIndeterminate="True"/>
+                </StackPanel>
+            </Border>
+
+            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Padding="10" Margin="0,40,0,0" Background="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Top" Width="360">
+                <StackPanel>
+                    <TextBlock Padding="7" Margin="0,7,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" FontWeight="Bold" >Aktualny % użytych liczb</TextBlock>
+                    <TextBlock Padding="7" Margin="0,3,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >32%</TextBlock>
+                    <TextBlock Padding="7" Margin="0,3,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >Użytych liczb jest: 150000/9000000</TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel >
+       
     </Grid>
 </mah:MetroWindow>
 
