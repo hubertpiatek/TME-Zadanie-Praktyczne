@@ -15,15 +15,14 @@ namespace TME_Zadanie_Praktyczne
     {
         ApplicationDbContext applicationDbContext = new ApplicationDbContext();
         BackgroundWorker backgroundWorker = new BackgroundWorker();
-        int totalRecords;
-        int totalUsedNumbers;
-        int totalFreeNumbers;
-        int userNumber;
-        Boolean progress;
+        private int totalRecords;
+        private int totalUsedNumbers;
+        private int totalFreeNumbers;
+        private int userNumber;
+        private Boolean progress;
         public MainWindow()
         {
             InitializeComponent();
-            
             InitDb();
             totalFreeNumbers = applicationDbContext.Numbers.Where(n => n.Status == "false").Count();
             totalRecords = applicationDbContext.Numbers.Count<Numbers>();
@@ -38,7 +37,6 @@ namespace TME_Zadanie_Praktyczne
 
         public void InitDb()
         {
-            
             int tableSize = 9000000;
             int tableNumberValue = 1000000;
             if (!applicationDbContext.Numbers.Any())
@@ -72,8 +70,10 @@ namespace TME_Zadanie_Praktyczne
             totalUsage.Text = totalUsedNumbers + "/" + totalRecords;
         }
 
-        public void clearUI(object sender, RunWorkerCompletedEventArgs e) {
-            if (e.Cancelled) {
+        public void clearUI(object sender, RunWorkerCompletedEventArgs e) 
+        {
+            if (e.Cancelled) 
+            {
                 percentUsage.Text = (Convert.ToDouble(totalUsedNumbers) / Convert.ToDouble(totalRecords)).ToString("0.0000%");
                 totalUsage.Text = totalUsedNumbers + "/" + totalRecords;
                 errorTextBlock.Foreground = Brushes.Black;
@@ -85,7 +85,10 @@ namespace TME_Zadanie_Praktyczne
         }
         public void changeFrontend(object sender, ProgressChangedEventArgs e)
         {
-            if (progress) progressBarStatus.Value = e.ProgressPercentage;
+            if (progress) 
+            {
+                progressBarStatus.Value = e.ProgressPercentage; 
+            }
             else if (amountOfNumberValue.Text.Length == 0)
             {
                 errorTextBlock.Visibility = Visibility.Visible;
@@ -138,7 +141,8 @@ namespace TME_Zadanie_Praktyczne
             }
         }
 
-        public void updateStatusInDB(int numberOfRecords) {
+        public void updateStatusInDB(int numberOfRecords)
+        {
             applicationDbContext.Numbers
                 .Where(s => s.Status == "false")
                 .OrderBy(x => Guid.NewGuid())
@@ -166,11 +170,18 @@ namespace TME_Zadanie_Praktyczne
                         for (int i = 0; i < numberOfsteps; i++)
                         {
                            backgroundWorker.ReportProgress(Convert.ToInt32(((double)(i + 1) / (double)numberOfsteps) * 100));
-                           if (i == numberOfsteps - 1) { updateStatusInDB(userNumber - (numberOfsteps - 1) * queryStep); }
-                           else { updateStatusInDB(queryStep); }
+                           if (i == numberOfsteps - 1) 
+                           { 
+                                updateStatusInDB(userNumber - (numberOfsteps - 1) * queryStep);
+                           }
+                           else 
+                           {
+                                updateStatusInDB(queryStep);
+                           }
                         }
                     }
-                    else {
+                    else 
+                    {
                         progress = true;
                         backgroundWorker.ReportProgress(20);
                         updateStatusInDB(userNumber); }
@@ -183,8 +194,15 @@ namespace TME_Zadanie_Praktyczne
         }
         private void drawNumbers(object sender, EventArgs e)
         {
-            if (!backgroundWorker.IsBusy) backgroundWorker.RunWorkerAsync();
-            else backgroundWorker.CancelAsync();
+            if (!backgroundWorker.IsBusy) 
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+            else 
+            {
+
+                backgroundWorker.CancelAsync();
+            }
         }
     }
 }
