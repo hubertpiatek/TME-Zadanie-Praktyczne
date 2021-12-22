@@ -65,6 +65,7 @@ namespace TME_Zadanie_Praktyczne
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
         private void calculateUsage()
         {
             totalUsedNumbers = applicationDbContext.Numbers.Where(n => n.Status == "true").Count();
