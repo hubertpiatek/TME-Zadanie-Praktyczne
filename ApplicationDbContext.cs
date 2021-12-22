@@ -9,6 +9,14 @@ namespace TME_Zadanie_Praktyczne
     {
         public ApplicationDbContext() :base(){}
         public DbSet<Numbers> Numbers { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Numbers>().ToTable("Numbers");
+        }
 
+        public Guid Random()
+        {
+            return Guid.NewGuid();
+        }
     }
 }
