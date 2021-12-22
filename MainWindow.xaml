@@ -39,7 +39,7 @@
                     <TextBox PreviewTextInput="numberValidationTextBox" x:Name="amountOfNumberValue" mah:TextBoxHelper.ClearTextButton="True" Width="280" mah:TextBoxHelper.Watermark="Ilość liczb" ></TextBox>
                     <Button Click="drawNumbers" Width="80" Margin="0,15,0,0" BorderBrush="#CC0078D7" Style="{StaticResource MahApps.Styles.Button.Square.Accent}">Losuj !</Button>
                     <TextBlock x:Name="errorTextBlock" Foreground="Red" Padding="7" Margin="0,3,0,0" FontSize="15" FontFamily="Georgia" TextAlignment="Center" Visibility="Collapsed"></TextBlock>
-                    <ProgressBar x:Name="progressBarStatus" Width="200" Margin="0,10,0,0" Minimum="0" Maximum="100" Value="30" Visibility="Collapsed" IsIndeterminate="True"/>
+                    <ProgressBar x:Name="progressBarStatus" Width="200" Margin="0,10,0,0" Minimum="0" Maximum="100" Value="0" Visibility="Collapsed" IsIndeterminate="False"/>
                 </StackPanel>
             </Border>
 
