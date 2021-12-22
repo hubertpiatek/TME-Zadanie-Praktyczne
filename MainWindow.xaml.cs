@@ -26,9 +26,8 @@ namespace TME_Zadanie_Praktyczne
             
             InitDb();
             totalFreeNumbers = applicationDbContext.Numbers.Where(n => n.Status == "false").Count();
-            Console.WriteLine(totalFreeNumbers);
             totalRecords = applicationDbContext.Numbers.Count<Numbers>();
-            this.applicationDbContext.Database.CommandTimeout = 180;
+            applicationDbContext.Database.CommandTimeout = 180;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.DoWork += saveNumbersToDb;
